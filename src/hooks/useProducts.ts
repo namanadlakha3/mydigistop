@@ -12,13 +12,23 @@ export const productKeys = {
 async function fetchProducts(filters: ProductFilters = {}) {
   const { search, category, sortBy = 'newest', featured, page = 1, pageSize = 12 } = filters;
 
+  let categoryId: string | undefined;
+  if (category) {
+    const { data: cat } = await supabase
+      .from('categories')
+      .select('id')
+      .eq('slug', category)
+      .single();
+    categoryId = cat?.id;
+  }
+
   let query = supabase
     .from('products')
     .select('*, category:categories(*), product_images(*)', { count: 'exact' })
     .eq('status', 'active');
 
   if (search) query = query.ilike('title', `%${search}%`);
-  if (category) query = query.eq('categories.slug', category);
+  if (categoryId) query = query.eq('category_id', categoryId);
   if (featured) query = query.eq('featured', true);
 
   switch (sortBy) {

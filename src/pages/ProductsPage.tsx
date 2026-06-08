@@ -63,20 +63,19 @@ export function ProductsPage() {
         <meta name="description" content="Browse our catalog of genuine digital license keys for Windows, Office, Antivirus, and more." />
       </Helmet>
 
-      <div className="min-h-screen pt-24">
+      <div className="min-h-screen bg-[#07080F]">
         {/* Header */}
-        <div className="py-12 relative overflow-hidden" style={{ background: 'rgba(108,71,255,0.06)', borderBottom: '1px solid rgba(255,255,255,0.06)' }}>
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}>
-              <h1 className="text-4xl font-black text-white mb-2">All Products</h1>
-              <p style={{ color: 'rgba(255,255,255,0.5)' }}>
-                {data?.total ?? 0} products available
-              </p>
+        <div className="pt-28 pb-12 border-b border-white/[0.07]" style={{ background: 'rgba(108,71,255,0.04)' }}>
+          <div className="max-w-[1200px] mx-auto px-6">
+            <motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }}>
+              <p className="text-[11px] font-bold uppercase tracking-widest g-text mb-2">Catalog</p>
+              <h1 className="text-3xl font-extrabold text-white tracking-tight mb-1.5">All Products</h1>
+              <p className="text-sm text-white/40">{data?.total ?? 0} products available</p>
             </motion.div>
           </div>
         </div>
 
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <div className="max-w-[1200px] mx-auto px-6 py-10">
           {/* Search & Filter Bar */}
           <div className="flex flex-wrap gap-4 mb-8">
             <div className="flex-1 min-w-64">
@@ -187,7 +186,7 @@ export function ProductsPage() {
               <p style={{ color: 'rgba(255,255,255,0.5)' }}>Try adjusting your search or filters</p>
             </div>
           ) : (
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
               {data?.products.map((product, i) => (
                 <ProductCard key={product.id} product={product} index={i} />
               ))}
