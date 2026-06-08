@@ -72,8 +72,12 @@ function ProductModal({ product, onClose }: ProductModalProps) {
     const file = e.target.files?.[0];
     if (!file || !product?.id) { toast.error('Save product first before uploading images'); return; }
     setUploadingImage(true);
-    const fileName = `${Date.now()}-${file.name}`;
-    const { data, error } = await supabase.storage.from('product-images').upload(fileName, file);
+    const sanitizedName = file.name.replace(/[^a-zA-Z0-9.-]/g, '_');
+    const fileName = `${Date.now()}-${sanitizedName}`;
+    const { data, error } = await supabase.storage.from('product-images').upload(fileName, file, {
+      cacheControl: '3600',
+      upsert: false
+    });
     if (error) { toast.error('Upload failed'); setUploadingImage(false); return; }
     const { data: { publicUrl } } = supabase.storage.from('product-images').getPublicUrl(data.path);
     await supabase.from('product_images').insert({ product_id: product.id, image_url: publicUrl, display_order: 0 });
