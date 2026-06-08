@@ -51,12 +51,15 @@ export function O365Checker() {
         throw new Error(error.message);
       }
 
-      if (data?.status === 'Error') {
-        setErrorMsg(data.res || 'An unknown error occurred from the API.');
+      const status = data?.status || data?.Status;
+      const res = data?.res || data?.Result;
+
+      if (status === 'Error' || status === 'error') {
+        setErrorMsg(res || 'An unknown error occurred from the API.');
         toast.error('Failed to check accounts');
-      } else if (data?.status === 'Success' && Array.isArray(data.res)) {
-        setResults(data.res);
-        toast.success(`Successfully checked ${data.res.length} accounts!`);
+      } else if ((status === 'Success' || status === 'success') && Array.isArray(res)) {
+        setResults(res);
+        toast.success(`Successfully checked ${res.length} accounts!`);
       } else {
         setErrorMsg(`Unexpected response: ${JSON.stringify(data)}`);
       }

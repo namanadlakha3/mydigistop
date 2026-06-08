@@ -48,13 +48,16 @@ export function KeyChecker() {
         throw new Error(error.message);
       }
 
+      const status = data?.status || data?.Status;
+      const res = data?.res || data?.Result;
+
       // Check if data is an error string or object
-      if (data?.status === 'Error') {
-        setErrorMsg(data.res || 'An unknown error occurred from the API.');
+      if (status === 'Error' || status === 'error') {
+        setErrorMsg(res || 'An unknown error occurred from the API.');
         toast.error('Failed to check keys');
-      } else if (data?.status === 'Success' && Array.isArray(data.res)) {
-        setResults(data.res);
-        toast.success(`Successfully checked ${data.res.length} keys!`);
+      } else if ((status === 'Success' || status === 'success') && Array.isArray(res)) {
+        setResults(res);
+        toast.success(`Successfully checked ${res.length} keys!`);
       } else {
         // Fallback or unmapped response
         setErrorMsg(`Unexpected response: ${JSON.stringify(data)}`);
