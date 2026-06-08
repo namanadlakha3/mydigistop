@@ -11,6 +11,7 @@ import { Navbar } from '@/components/layout/Navbar';
 import { Footer } from '@/components/layout/Footer';
 import { CartDrawer } from '@/features/cart/CartDrawer';
 import { AuthCallback } from '@/features/auth/AuthCallback';
+import { CidApp } from '@/features/cid/CidApp';
 
 // Lazy-loaded pages
 const HomePage = lazy(() => import('@/pages/HomePage').then(m => ({ default: m.HomePage })));
@@ -66,6 +67,29 @@ function PublicLayout({ children }: { children: React.ReactNode }) {
 }
 
 export default function App() {
+  // Force enable the CID app for now without needing a dev server restart
+  const isCidAppEnabled = true; // import.meta.env.VITE_ENABLE_CID_APP === 'true';
+
+  if (isCidAppEnabled) {
+    return (
+      <HelmetProvider>
+        <QueryClientProvider client={queryClient}>
+          <CidApp />
+          <Toaster
+            position="top-right"
+            toastOptions={{
+              style: {
+                background: '#12152A',
+                border: '1px solid rgba(255,255,255,0.1)',
+                color: '#fff',
+              },
+            }}
+          />
+        </QueryClientProvider>
+      </HelmetProvider>
+    );
+  }
+
   return (
     <HelmetProvider>
       <QueryClientProvider client={queryClient}>
