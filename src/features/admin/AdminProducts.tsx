@@ -45,7 +45,7 @@ function ProductModal({ product, onClose }: ProductModalProps) {
   const [uploadingImage, setUploadingImage] = useState(false);
 
   const { register, handleSubmit, watch, setValue, formState: { errors } } = useForm<ProductFormData>({
-    resolver: zodResolver(productSchema),
+    resolver: zodResolver(productSchema) as any,
     defaultValues: {
       title: product?.title || '',
       slug: product?.slug || '',

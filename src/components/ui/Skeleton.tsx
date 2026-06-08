@@ -5,8 +5,8 @@ interface SkeletonProps {
   count?: number;
 }
 
-export function Skeleton({ className }: { className?: string }) {
-  return <div className={cn('skeleton', className)} />;
+export function Skeleton({ className, ...props }: React.HTMLAttributes<HTMLDivElement>) {
+  return <div className={cn('skeleton', className)} {...props} />;
 }
 
 export function ProductCardSkeleton() {
