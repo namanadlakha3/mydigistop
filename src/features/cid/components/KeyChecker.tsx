@@ -25,7 +25,7 @@ export function KeyChecker() {
 
     // Parse keys from textarea
     const rawLines = keysText.split('\n').map(line => line.trim()).filter(Boolean);
-    
+
     if (rawLines.length === 0) {
       toast.error('Please enter at least one key');
       return;
@@ -58,7 +58,7 @@ export function KeyChecker() {
         toast.error('Failed to check keys');
       } else if ((status === 'Success' || status === 'success') && Array.isArray(res)) {
         setResults(res);
-        toast.success(`Successfully checked ${res.length} keys!`);
+        toast.success(`Finished checking ${res.length} keys!`);
       } else {
         // Fallback or unmapped response
         setErrorMsg(`Unexpected response: ${JSON.stringify(data)}`);
@@ -90,7 +90,7 @@ export function KeyChecker() {
           KEY
         </div>
       </div>
-      
+
       <h2 className="text-2xl font-bold text-center mb-2">Bulk Key Checker</h2>
       <p className="text-white/50 text-center mb-8 text-sm">
         Paste your product keys below (one per line, up to 20 keys).
@@ -149,16 +149,26 @@ export function KeyChecker() {
                     {item.key_status || item.error || item.description || 'Unknown Status'}
                   </div>
                 </div>
-                
+
                 {item.description && (
                   <div className="text-white/70 mt-2 mb-1">
                     {item.description}
                   </div>
                 )}
-                
+
                 <div className="flex flex-wrap items-center gap-x-4 gap-y-1 text-xs text-white/40 mt-3 border-t border-white/5 pt-3">
                   {item.subtype && <div>Subtype: <span className="text-white/60">{item.subtype}</span></div>}
                   {item.time && <div>Checked: <span className="text-white/60">{item.time}</span></div>}
+                </div>
+
+                {/* Debug Raw JSON */}
+                <div className="mt-4 pt-3 border-t border-white/10">
+                  <details className="text-xs text-white/40 cursor-pointer">
+                    <summary className="font-semibold hover:text-white/70 transition-colors">View Raw API Response for this Key</summary>
+                    <pre className="mt-2 p-2 bg-black/40 rounded-md overflow-x-auto break-all font-mono text-[10px] text-white/60">
+                      {JSON.stringify(item, null, 2)}
+                    </pre>
+                  </details>
                 </div>
               </div>
             ))}
