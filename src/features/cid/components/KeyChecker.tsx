@@ -9,6 +9,7 @@ type KeyResult = {
   subtype?: string;
   key_status?: string;
   time?: string;
+  error?: string;
 };
 
 export function KeyChecker() {
@@ -144,8 +145,8 @@ export function KeyChecker() {
               <div key={idx} className="bg-white/5 border border-white/10 rounded-xl p-4 text-sm">
                 <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-3 mb-2">
                   <div className="font-mono text-white break-all">{item.key || 'Unknown Key'}</div>
-                  <div className={`px-2.5 py-1 rounded-md border text-xs font-semibold whitespace-nowrap w-fit ${getStatusColor(item.key_status || item.description)}`}>
-                    {item.key_status || 'Unknown Status'}
+                  <div className={`px-2.5 py-1 rounded-md border text-xs font-semibold whitespace-nowrap w-fit ${getStatusColor(item.key_status || item.error || item.description)}`}>
+                    {item.key_status || item.error || item.description || 'Unknown Status'}
                   </div>
                 </div>
                 
