@@ -11,7 +11,6 @@ import { Navbar } from '@/components/layout/Navbar';
 import { Footer } from '@/components/layout/Footer';
 import { CartDrawer } from '@/features/cart/CartDrawer';
 import { AuthCallback } from '@/features/auth/AuthCallback';
-import { CidApp } from '@/features/cid/CidApp';
 
 // Lazy-loaded pages
 const HomePage = lazy(() => import('@/pages/HomePage').then(m => ({ default: m.HomePage })));
@@ -22,6 +21,7 @@ const AboutPage = lazy(() => import('@/pages/AboutPage').then(m => ({ default: m
 const ContactPage = lazy(() => import('@/pages/ContactPage').then(m => ({ default: m.ContactPage })));
 const TermsPage = lazy(() => import('@/pages/LegalPages').then(m => ({ default: m.TermsPage })));
 const PrivacyPage = lazy(() => import('@/pages/LegalPages').then(m => ({ default: m.PrivacyPage })));
+const ToolsPage = lazy(() => import('@/pages/ToolsPage').then(m => ({ default: m.ToolsPage })));
 
 // Dashboard
 const DashboardLayout = lazy(() => import('@/features/dashboard/DashboardLayout').then(m => ({ default: m.DashboardLayout })));
@@ -67,29 +67,6 @@ function PublicLayout({ children }: { children: React.ReactNode }) {
 }
 
 export default function App() {
-  // Force enable the CID app for now without needing a dev server restart
-  const isCidAppEnabled = true; // import.meta.env.VITE_ENABLE_CID_APP === 'true';
-
-  if (isCidAppEnabled) {
-    return (
-      <HelmetProvider>
-        <QueryClientProvider client={queryClient}>
-          <CidApp />
-          <Toaster
-            position="top-right"
-            toastOptions={{
-              style: {
-                background: '#12152A',
-                border: '1px solid rgba(255,255,255,0.1)',
-                color: '#fff',
-              },
-            }}
-          />
-        </QueryClientProvider>
-      </HelmetProvider>
-    );
-  }
-
   return (
     <HelmetProvider>
       <QueryClientProvider client={queryClient}>
@@ -139,6 +116,13 @@ export default function App() {
                 <Route path="/privacy" element={
                   <PublicLayout>
                     <PrivacyPage />
+                  </PublicLayout>
+                } />
+
+                {/* Tools Page — CID Generator, Key Checker & O365 Checker */}
+                <Route path="/tools" element={
+                  <PublicLayout>
+                    <ToolsPage />
                   </PublicLayout>
                 } />
 

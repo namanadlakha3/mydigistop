@@ -11,6 +11,7 @@ import { getInitials } from '@/lib/utils';
 
 const NAV = [
   { to: '/products', label: 'Products' },
+  { to: '/tools',    label: 'Tools'    },
   { to: '/about',    label: 'About'    },
   { to: '/contact',  label: 'Contact'  },
 ];

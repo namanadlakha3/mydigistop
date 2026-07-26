@@ -14,6 +14,11 @@ const LINKS = {
     { label: 'Terms',     to: '/terms'   },
     { label: 'Privacy',   to: '/privacy' },
   ],
+  Tools: [
+    { label: 'CID Generator', to: '/tools'           },
+    { label: 'Key Checker',   to: '/tools'           },
+    { label: 'O365 Checker',  to: '/tools'           },
+  ],
   Account: [
     { label: 'Sign In',   to: '/?signin=1'           },
     { label: 'My Orders', to: '/dashboard/orders'     },
@@ -28,7 +33,7 @@ export function Footer() {
       <div className="max-w-[1200px] mx-auto px-6 pt-16 pb-10">
 
         {/* Top grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-10 mb-14">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-6 gap-10 mb-14">
 
           {/* Brand block */}
           <div className="lg:col-span-2 space-y-5">
