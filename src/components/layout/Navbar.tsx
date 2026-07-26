@@ -56,8 +56,8 @@ export function Navbar() {
       transition={{ duration: 0.4, ease: 'easeOut' }}
       className={`fixed top-0 inset-x-0 z-50 transition-all duration-300 ${
         scrolled
-          ? 'bg-[#0F1117]/92 backdrop-blur-2xl border-b border-white/[0.09] py-3'
-          : 'bg-transparent border-b border-transparent py-5'
+          ? 'bg-white/95 backdrop-blur-2xl shadow-sm border-b border-slate-200 py-3'
+          : 'bg-white/80 backdrop-blur-xl border-b border-slate-100 py-4'
       }`}
     >
       <div className="max-w-[1200px] mx-auto px-6 flex items-center gap-8">
@@ -65,12 +65,12 @@ export function Navbar() {
         {/* ── Logo ── */}
         <Link to="/" className="flex items-center gap-2.5 shrink-0 no-underline group">
           <div
-            className="w-8 h-8 rounded-[10px] flex items-center justify-center text-white font-black text-[13px] transition-transform duration-200 group-hover:scale-105"
-            style={{ background: 'linear-gradient(135deg, #7C5FFF, #22D3EE)' }}
+            className="w-8 h-8 rounded-[10px] flex items-center justify-center text-white font-black text-[13px] transition-transform duration-200 group-hover:scale-105 shadow-sm"
+            style={{ background: 'linear-gradient(135deg, #4F46E5, #0EA5E9)' }}
           >
             M
           </div>
-          <span className="text-[15px] font-bold text-white/90 tracking-tight">
+          <span className="text-[15px] font-bold text-slate-800 tracking-tight">
             MyDigi<span className="g-text">Stop</span>
           </span>
         </Link>
@@ -82,8 +82,8 @@ export function Navbar() {
               className={({ isActive }) =>
                 `px-4 py-2 rounded-lg text-[13.5px] font-medium no-underline transition-all duration-150 ${
                   isActive
-                    ? 'text-white bg-white/[0.08]'
-                    : 'text-white/50 hover:text-white/90 hover:bg-white/[0.05]'
+                    ? 'text-indigo-600 bg-indigo-50'
+                    : 'text-slate-600 hover:text-slate-900 hover:bg-slate-100'
                 }`
               }
             >
@@ -99,14 +99,14 @@ export function Navbar() {
           <button
             onClick={toggleCart}
             aria-label="Cart"
-            className="relative p-2 rounded-lg text-white/45 hover:text-white/90 hover:bg-white/[0.07] transition-all duration-150 border-none bg-transparent cursor-pointer"
+            className="relative p-2 rounded-lg text-slate-500 hover:text-slate-800 hover:bg-slate-100 transition-all duration-150 border-none bg-transparent cursor-pointer"
           >
             <ShoppingCart size={18} />
             {cartCount > 0 && (
               <motion.span
                 initial={{ scale: 0 }} animate={{ scale: 1 }}
                 className="absolute -top-0.5 -right-0.5 w-4 h-4 rounded-full text-white text-[10px] font-bold flex items-center justify-center"
-                style={{ background: 'linear-gradient(135deg, #7C5FFF, #22D3EE)' }}
+                style={{ background: 'linear-gradient(135deg, #4F46E5, #0EA5E9)' }}
               >
                 {cartCount > 9 ? '9+' : cartCount}
               </motion.span>
@@ -118,31 +118,30 @@ export function Navbar() {
             <div ref={dropRef} className="relative">
               <button
                 onClick={() => setProfileOpen(p => !p)}
-                className="flex items-center gap-2 px-2 py-1.5 rounded-xl hover:bg-white/[0.07] transition-all duration-150 border-none bg-transparent cursor-pointer"
+                className="flex items-center gap-2 px-2 py-1.5 rounded-xl hover:bg-slate-100 transition-all duration-150 border-none bg-transparent cursor-pointer"
               >
-                {/* Avatar — always visible */}
+                {/* Avatar */}
                 {profile?.avatar_url ? (
                   <img
                     src={profile.avatar_url}
                     alt={profile.full_name || 'User'}
                     referrerPolicy="no-referrer"
-                    className="w-7 h-7 rounded-full object-cover ring-2 ring-white/20"
+                    className="w-7 h-7 rounded-full object-cover ring-2 ring-indigo-200"
                   />
                 ) : (
                   <div
                     className="w-7 h-7 rounded-full flex items-center justify-center text-[11px] font-bold text-white shrink-0"
-                    style={{ background: 'linear-gradient(135deg, #7C5FFF, #22D3EE)' }}
+                    style={{ background: 'linear-gradient(135deg, #4F46E5, #0EA5E9)' }}
                   >
                     {getInitials(profile?.full_name || user.email || 'U')}
                   </div>
                 )}
-                {/* Name — visible on sm+ */}
-                <span className="hidden sm:block text-[13px] font-medium text-white/75 max-w-[90px] truncate">
+                <span className="hidden sm:block text-[13px] font-medium text-slate-700 max-w-[90px] truncate">
                   {profile?.full_name?.split(' ')[0] || 'Account'}
                 </span>
                 <ChevronDown
                   size={12}
-                  className={`text-white/30 transition-transform duration-200 ${profileOpen ? 'rotate-180' : ''}`}
+                  className={`text-slate-400 transition-transform duration-200 ${profileOpen ? 'rotate-180' : ''}`}
                 />
               </button>
 
@@ -154,51 +153,47 @@ export function Navbar() {
                     animate={{ opacity: 1, y: 0, scale: 1 }}
                     exit={{ opacity: 0, y: 6, scale: 0.97 }}
                     transition={{ duration: 0.14 }}
-                    className="absolute right-0 top-full mt-2 w-52 rounded-2xl p-1.5 border border-white/[0.12] z-50"
-                    style={{
-                      background: 'rgba(19,22,35,0.98)',
-                      backdropFilter: 'blur(24px)',
-                      boxShadow: '0 20px 60px rgba(0,0,0,0.5), 0 0 0 1px rgba(124,95,255,0.08)',
-                    }}
+                    className="absolute right-0 top-full mt-2 w-52 rounded-2xl p-1.5 border border-slate-200 z-50 bg-white shadow-xl"
+                    style={{ boxShadow: '0 8px 32px rgba(15,23,42,0.12), 0 2px 8px rgba(15,23,42,0.06)' }}
                   >
                     {/* User info */}
-                    <div className="flex items-center gap-2.5 px-3 py-3 border-b border-white/[0.07] mb-1">
+                    <div className="flex items-center gap-2.5 px-3 py-3 border-b border-slate-100 mb-1">
                       {profile?.avatar_url ? (
                         <img
                           src={profile.avatar_url}
                           alt=""
                           referrerPolicy="no-referrer"
-                          className="w-8 h-8 rounded-full object-cover shrink-0 ring-2 ring-white/15"
+                          className="w-8 h-8 rounded-full object-cover shrink-0 ring-2 ring-indigo-100"
                         />
                       ) : (
                         <div
                           className="w-8 h-8 rounded-full flex items-center justify-center text-xs font-bold text-white shrink-0"
-                          style={{ background: 'linear-gradient(135deg, #7C5FFF, #22D3EE)' }}
+                          style={{ background: 'linear-gradient(135deg, #4F46E5, #0EA5E9)' }}
                         >
                           {getInitials(profile?.full_name || user.email || 'U')}
                         </div>
                       )}
                       <div className="min-w-0">
-                        <p className="text-[13px] font-semibold text-white truncate leading-tight">
+                        <p className="text-[13px] font-semibold text-slate-800 truncate leading-tight">
                           {profile?.full_name || 'User'}
                         </p>
-                        <p className="text-[11px] text-white/38 truncate mt-0.5">{user.email}</p>
+                        <p className="text-[11px] text-slate-400 truncate mt-0.5">{user.email}</p>
                       </div>
                     </div>
 
                     {menuItems.map(({ icon: Icon, label, path }) => (
                       <button key={path}
                         onClick={() => { navigate(path); setProfileOpen(false); }}
-                        className="w-full flex items-center gap-2.5 px-3 py-2 rounded-xl text-[13px] text-white/58 hover:text-white hover:bg-white/[0.07] transition-all duration-100 border-none bg-transparent cursor-pointer text-left"
+                        className="w-full flex items-center gap-2.5 px-3 py-2 rounded-xl text-[13px] text-slate-600 hover:text-slate-900 hover:bg-slate-50 transition-all duration-100 border-none bg-transparent cursor-pointer text-left"
                       >
-                        <Icon size={13} className="shrink-0" /> {label}
+                        <Icon size={13} className="shrink-0 text-slate-400" /> {label}
                       </button>
                     ))}
 
-                    <div className="border-t border-white/[0.07] mx-1 my-1" />
+                    <div className="border-t border-slate-100 mx-1 my-1" />
                     <button
                       onClick={() => { signOut(); setProfileOpen(false); }}
-                      className="w-full flex items-center gap-2.5 px-3 py-2 rounded-xl text-[13px] text-red-400/75 hover:text-red-300 hover:bg-red-500/[0.08] transition-all duration-100 border-none bg-transparent cursor-pointer text-left"
+                      className="w-full flex items-center gap-2.5 px-3 py-2 rounded-xl text-[13px] text-red-500 hover:text-red-600 hover:bg-red-50 transition-all duration-100 border-none bg-transparent cursor-pointer text-left"
                     >
                       <LogOut size={13} className="shrink-0" /> Sign Out
                     </button>
@@ -209,7 +204,7 @@ export function Navbar() {
           ) : (
             <button
               onClick={signInWithGoogle}
-              className="hidden sm:flex items-center gap-1.5 ml-1 px-4 py-2 rounded-xl text-[13px] font-semibold text-[#9D86FF] border border-[#7C5FFF]/28 hover:bg-[#7C5FFF]/10 hover:border-[#7C5FFF]/45 transition-all duration-150 cursor-pointer bg-transparent"
+              className="hidden sm:flex items-center gap-1.5 ml-1 px-4 py-2 rounded-xl text-[13px] font-semibold text-indigo-600 border border-indigo-200 hover:bg-indigo-50 hover:border-indigo-300 transition-all duration-150 cursor-pointer bg-transparent"
             >
               <User size={13} /> Sign In
             </button>
@@ -218,7 +213,7 @@ export function Navbar() {
           {/* Mobile toggle */}
           <button
             onClick={() => setMobileOpen(p => !p)}
-            className="md:hidden p-2 rounded-lg text-white/45 hover:text-white/90 hover:bg-white/[0.07] transition-all duration-150 border-none bg-transparent cursor-pointer ml-1"
+            className="md:hidden p-2 rounded-lg text-slate-500 hover:text-slate-800 hover:bg-slate-100 transition-all duration-150 border-none bg-transparent cursor-pointer ml-1"
           >
             {mobileOpen ? <X size={18} /> : <Menu size={18} />}
           </button>
@@ -232,8 +227,7 @@ export function Navbar() {
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: 'auto' }}
             exit={{ opacity: 0, height: 0 }}
-            className="md:hidden overflow-hidden border-t border-white/[0.07]"
-            style={{ background: 'rgba(15,17,23,0.97)', backdropFilter: 'blur(24px)' }}
+            className="md:hidden overflow-hidden border-t border-slate-200 bg-white"
           >
             <div className="px-6 py-3 flex flex-col gap-0.5">
               {NAV.map(l => (
@@ -241,7 +235,7 @@ export function Navbar() {
                   onClick={() => setMobileOpen(false)}
                   className={({ isActive }) =>
                     `px-4 py-3 rounded-xl text-[13.5px] font-medium no-underline transition-all duration-150 ${
-                      isActive ? 'text-white bg-white/[0.08]' : 'text-white/55 hover:text-white'
+                      isActive ? 'text-indigo-600 bg-indigo-50' : 'text-slate-600 hover:text-slate-900 hover:bg-slate-50'
                     }`
                   }
                 >
@@ -251,7 +245,7 @@ export function Navbar() {
               {!user && (
                 <button
                   onClick={signInWithGoogle}
-                  className="mt-2 flex items-center justify-center gap-2 py-3 rounded-xl text-[13px] font-semibold text-[#9D86FF] border border-[#7C5FFF]/28 bg-[#7C5FFF]/[0.08] cursor-pointer"
+                  className="mt-2 flex items-center justify-center gap-2 py-3 rounded-xl text-[13px] font-semibold text-indigo-600 border border-indigo-200 bg-indigo-50 cursor-pointer"
                 >
                   <User size={14} /> Sign In with Google
                 </button>

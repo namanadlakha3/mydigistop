@@ -54,16 +54,15 @@ export function ProductCard({ product, index = 0 }: { product: Product; index?: 
     >
       <Link to={`/products/${product.slug}`} className="block no-underline group">
         <div
-          className="rounded-2xl overflow-hidden border transition-all duration-250"
+          className="rounded-2xl overflow-hidden border transition-all duration-250 bg-white"
           style={{
-            background: hovered ? '#1E2438' : '#161B27',
-            borderColor: hovered ? 'rgba(124,95,255,0.32)' : 'rgba(255,255,255,0.09)',
-            boxShadow: hovered ? '0 12px 40px rgba(124,95,255,0.12)' : 'none',
+            borderColor: hovered ? 'rgba(79,70,229,0.3)' : '#E2E8F0',
+            boxShadow: hovered ? '0 8px 32px rgba(79,70,229,0.12)' : '0 1px 3px rgba(0,0,0,0.05)',
             transform: hovered ? 'translateY(-3px)' : 'translateY(0)',
           }}
         >
           {/* ── Image ── */}
-          <div className="relative overflow-hidden" style={{ height: 176 }}>
+          <div className="relative overflow-hidden bg-slate-50" style={{ height: 176 }}>
             {mainImage ? (
               <img
                 src={mainImage}
@@ -74,12 +73,12 @@ export function ProductCard({ product, index = 0 }: { product: Product; index?: 
               />
             ) : (
               <div className="w-full h-full flex flex-col items-center justify-center gap-2.5"
-                style={{ background: 'linear-gradient(145deg, rgba(124,95,255,0.07), rgba(34,211,238,0.04))' }}>
-                <div className="w-12 h-12 rounded-[14px] flex items-center justify-center border border-[#7C5FFF]/20 bg-[#7C5FFF]/10">
-                  <Package size={22} className="text-[#9D86FF]/60" />
+                style={{ background: 'linear-gradient(145deg, rgba(79,70,229,0.06), rgba(14,165,233,0.04))' }}>
+                <div className="w-12 h-12 rounded-[14px] flex items-center justify-center border border-indigo-200 bg-indigo-50">
+                  <Package size={22} className="text-indigo-400" />
                 </div>
                 {product.category && (
-                  <span className="text-[10px] font-semibold uppercase tracking-widest text-white/20">
+                  <span className="text-[10px] font-semibold uppercase tracking-widest text-slate-400">
                     {product.category.name}
                   </span>
                 )}
@@ -89,7 +88,7 @@ export function ProductCard({ product, index = 0 }: { product: Product; index?: 
             {/* Discount badge */}
             {hasDiscount && (
               <span className="absolute top-2.5 left-2.5 px-2 py-0.5 rounded-[6px] text-[11px] font-bold text-white"
-                style={{ background: 'linear-gradient(135deg, #7C5FFF, #22D3EE)' }}>
+                style={{ background: 'linear-gradient(135deg, #EF4444, #F97316)' }}>
                 -{discountPct}%
               </span>
             )}
@@ -97,21 +96,17 @@ export function ProductCard({ product, index = 0 }: { product: Product; index?: 
             {/* Wishlist btn */}
             <button
               onClick={handleWishlist}
-              className="absolute top-2.5 right-2.5 w-8 h-8 rounded-[8px] flex items-center justify-center border border-white/10 cursor-pointer bg-transparent transition-opacity duration-200"
-              style={{
-                background: 'rgba(15,17,23,0.75)',
-                backdropFilter: 'blur(8px)',
-                opacity: hovered ? 1 : 0,
-              }}
+              className="absolute top-2.5 right-2.5 w-8 h-8 rounded-[8px] flex items-center justify-center border border-slate-200 cursor-pointer bg-white/90 backdrop-blur-sm transition-opacity duration-200 hover:bg-white"
+              style={{ opacity: hovered ? 1 : 0 }}
             >
-              <Heart size={13} className={wishlisted ? 'text-rose-400 fill-rose-400' : 'text-white/60'} />
+              <Heart size={13} className={wishlisted ? 'text-rose-500 fill-rose-500' : 'text-slate-400'} />
             </button>
 
             {/* Out of stock */}
             {isOutOfStock && (
               <div className="absolute inset-0 flex items-center justify-center"
-                style={{ background: 'rgba(15,17,23,0.7)', backdropFilter: 'blur(4px)' }}>
-                <span className="text-xs font-semibold text-white/50 px-3 py-1.5 rounded-full border border-white/12">
+                style={{ background: 'rgba(248,249,252,0.85)', backdropFilter: 'blur(4px)' }}>
+                <span className="text-xs font-semibold text-slate-500 px-3 py-1.5 rounded-full border border-slate-300 bg-white">
                   Out of Stock
                 </span>
               </div>
@@ -121,34 +116,34 @@ export function ProductCard({ product, index = 0 }: { product: Product; index?: 
           {/* ── Content ── */}
           <div className="p-4 pb-4">
             {product.category && (
-              <p className="text-[10px] font-bold uppercase tracking-widest mb-1.5 text-[#9D86FF]/80">
+              <p className="text-[10px] font-bold uppercase tracking-widest mb-1.5 text-indigo-500">
                 {product.category.name}
               </p>
             )}
 
             <h3
               className="text-[13px] font-semibold leading-snug mb-3.5 transition-colors duration-150"
-              style={{ color: hovered ? '#C4B5FD' : '#CDD5E0', minHeight: '2.5rem' }}
+              style={{ color: hovered ? '#4F46E5' : '#334155', minHeight: '2.5rem' }}
             >
               {truncate(product.title, 58)}
             </h3>
 
             <div className="flex items-center justify-between gap-2">
               <div className="flex items-baseline gap-1.5">
-                <span className="text-[16px] font-extrabold text-white">{formatPrice(displayPrice)}</span>
+                <span className="text-[16px] font-extrabold text-slate-900">{formatPrice(displayPrice)}</span>
                 {hasDiscount && (
-                  <span className="text-xs text-white/28 line-through">{formatPrice(product.price)}</span>
+                  <span className="text-xs text-slate-400 line-through">{formatPrice(product.price)}</span>
                 )}
               </div>
 
               <button
                 onClick={handleAdd}
                 disabled={isOutOfStock || adding}
-                className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold transition-all duration-150 shrink-0 cursor-pointer"
+                className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold transition-all duration-150 shrink-0 cursor-pointer border"
                 style={{
-                  background: adding ? 'rgba(34,211,238,0.1)' : 'rgba(124,95,255,0.12)',
-                  border: `1px solid ${adding ? 'rgba(34,211,238,0.28)' : 'rgba(124,95,255,0.28)'}`,
-                  color: adding ? '#22D3EE' : '#B8A5FF',
+                  background: adding ? '#ECFDF5' : '#EEF2FF',
+                  borderColor: adding ? '#A7F3D0' : '#C7D2FE',
+                  color: adding ? '#059669' : '#4F46E5',
                   opacity: isOutOfStock ? 0.4 : 1,
                   cursor: isOutOfStock ? 'not-allowed' : 'pointer',
                 }}

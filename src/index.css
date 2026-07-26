@@ -1,17 +1,31 @@
 @import "tailwindcss";
 
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400&family=Inter:wght@400;500;600&display=swap');
 
 @theme {
-  --font-sans: 'Inter', ui-sans-serif, system-ui, sans-serif;
-  --color-brand:       #7C5FFF;
-  --color-brand-light: #9D86FF;
-  --color-cyan:        #22D3EE;
-  --color-bg:          #0F1117;
-  --color-surface-1:   #161B27;
-  --color-surface-2:   #1E2438;
-  --color-border:      rgba(255,255,255,0.10);
-  --color-border-str:  rgba(255,255,255,0.18);
+  --font-sans: 'Plus Jakarta Sans', 'Inter', ui-sans-serif, system-ui, sans-serif;
+
+  /* ── Brand palette ── */
+  --color-brand:        #4F46E5;   /* Indigo 600 — primary CTA */
+  --color-brand-hover:  #4338CA;   /* Indigo 700 */
+  --color-brand-light:  #818CF8;   /* Indigo 400 */
+  --color-brand-muted:  #EEF2FF;   /* Indigo 50  */
+  --color-accent:       #0EA5E9;   /* Sky 500 */
+
+  /* ── Surface palette ── */
+  --color-bg:           #F8F9FC;   /* near-white canvas */
+  --color-surface:      #FFFFFF;
+  --color-surface-2:    #F1F5F9;   /* slate-100 */
+  --color-surface-3:    #E2E8F0;   /* slate-200 */
+
+  /* ── Text ── */
+  --color-text:         #0F172A;   /* slate-900 */
+  --color-text-2:       #475569;   /* slate-600 */
+  --color-text-3:       #94A3B8;   /* slate-400 */
+
+  /* ── Borders ── */
+  --color-border:       #E2E8F0;
+  --color-border-str:   #CBD5E1;
 }
 
 /* ── Reset ── */
@@ -19,9 +33,9 @@
 html { scroll-behavior: smooth; }
 
 body {
-  font-family: 'Inter', ui-sans-serif, system-ui, sans-serif;
-  background-color: #0F1117;
-  color: #CDD5E0;
+  font-family: 'Plus Jakarta Sans', 'Inter', ui-sans-serif, system-ui, sans-serif;
+  background-color: #F8F9FC;
+  color: #0F172A;
   line-height: 1.6;
   min-height: 100vh;
   -webkit-font-smoothing: antialiased;
@@ -30,31 +44,58 @@ body {
 
 /* ── Scrollbar ── */
 ::-webkit-scrollbar { width: 5px; }
-::-webkit-scrollbar-track { background: #0F1117; }
-::-webkit-scrollbar-thumb { background: rgba(124,95,255,0.4); border-radius: 4px; }
+::-webkit-scrollbar-track { background: #F1F5F9; }
+::-webkit-scrollbar-thumb { background: rgba(79,70,229,0.3); border-radius: 4px; }
+::-webkit-scrollbar-thumb:hover { background: rgba(79,70,229,0.5); }
 
 /* ── Selection / Focus ── */
-::selection { background: rgba(124,95,255,0.28); color: #fff; }
-:focus-visible { outline: 2px solid #7C5FFF; outline-offset: 2px; }
+::selection { background: rgba(79,70,229,0.18); color: #1e1b4b; }
+:focus-visible { outline: 2px solid #4F46E5; outline-offset: 2px; }
 
 /* ── Gradient text ── */
 .g-text {
-  background: linear-gradient(135deg, #9D86FF 0%, #38BDF8 100%);
+  background: linear-gradient(135deg, #4F46E5 0%, #0EA5E9 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
 }
 
-/* ── Hero glow ── */
+/* ── Warm gradient text (for hero) ── */
+.g-text-warm {
+  background: linear-gradient(135deg, #4F46E5 0%, #7C3AED 50%, #0EA5E9 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* ── Hero soft radial ── */
 .hero-glow { position: relative; overflow: hidden; }
 .hero-glow::before {
   content: '';
   position: absolute;
-  top: -240px; left: 50%;
+  top: -180px; left: 50%;
   transform: translateX(-50%);
-  width: 900px; height: 700px;
+  width: 1000px; height: 600px;
   border-radius: 50%;
-  background: radial-gradient(ellipse, rgba(124,95,255,0.18) 0%, transparent 70%);
+  background: radial-gradient(ellipse, rgba(79,70,229,0.10) 0%, rgba(14,165,233,0.05) 50%, transparent 75%);
+  pointer-events: none;
+}
+
+/* ── Hero decorative blobs ── */
+.hero-blob-1 {
+  position: absolute;
+  width: 480px; height: 480px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(79,70,229,0.12), transparent 70%);
+  top: -100px; right: -100px;
+  pointer-events: none;
+}
+.hero-blob-2 {
+  position: absolute;
+  width: 360px; height: 360px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(14,165,233,0.10), transparent 70%);
+  bottom: -80px; left: -80px;
   pointer-events: none;
 }
 
@@ -65,9 +106,9 @@ body {
 }
 .skeleton {
   background: linear-gradient(90deg,
-    rgba(255,255,255,0.05) 0%,
-    rgba(255,255,255,0.10) 50%,
-    rgba(255,255,255,0.05) 100%
+    #E2E8F0 0%,
+    #F1F5F9 50%,
+    #E2E8F0 100%
   );
   background-size: 600px 100%;
   animation: shimmer 1.6s infinite;
@@ -75,10 +116,10 @@ body {
 }
 
 /* ── Status pills ── */
-.status-pending    { @apply bg-amber-500/10  text-amber-300  border border-amber-500/20;  }
-.status-processing { @apply bg-blue-500/10   text-blue-300   border border-blue-500/20;   }
-.status-delivered  { @apply bg-emerald-500/10 text-emerald-300 border border-emerald-500/20; }
-.status-cancelled  { @apply bg-red-500/10    text-red-400    border border-red-500/20;    }
+.status-pending    { background: #FEF3C7; color: #92400E; border: 1px solid #FDE68A; }
+.status-processing { background: #DBEAFE; color: #1E40AF; border: 1px solid #BFDBFE; }
+.status-delivered  { background: #D1FAE5; color: #065F46; border: 1px solid #A7F3D0; }
+.status-cancelled  { background: #FEE2E2; color: #991B1B; border: 1px solid #FECACA; }
 
 /* ── Pulse dot ── */
 @keyframes pulse-dot { 0%,100%{opacity:1} 50%{opacity:.35} }
@@ -86,26 +127,92 @@ body {
 
 /* ── Card base ── */
 .card {
-  background: rgba(22,27,39,0.85);
-  border: 1px solid rgba(255,255,255,0.10);
+  background: #FFFFFF;
+  border: 1px solid #E2E8F0;
   border-radius: 16px;
   transition: border-color .25s, box-shadow .25s, transform .25s;
 }
 .card:hover {
-  border-color: rgba(124,95,255,0.32);
-  box-shadow: 0 8px 32px rgba(124,95,255,0.12);
+  border-color: rgba(79,70,229,0.3);
+  box-shadow: 0 8px 32px rgba(79,70,229,0.10);
   transform: translateY(-2px);
 }
 
-/* ── Nav-active indicator ── */
-.nav-active {
-  position: relative;
+/* ── Glass card (light version) ── */
+.glass-card {
+  background: rgba(255,255,255,0.85);
+  border: 1px solid rgba(226,232,240,0.9);
+  border-radius: 16px;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  box-shadow: 0 1px 3px rgba(0,0,0,0.06), 0 1px 2px rgba(0,0,0,0.04);
 }
+
+/* ── Section alternating ── */
+.section-alt { background: #F1F5F9; }
+
+/* ── Nav-active indicator ── */
+.nav-active { position: relative; }
 .nav-active::after {
   content: '';
   position: absolute;
   bottom: -2px; left: 12px; right: 12px;
   height: 2px;
   border-radius: 1px;
-  background: linear-gradient(90deg, #7C5FFF, #38BDF8);
+  background: linear-gradient(90deg, #4F46E5, #0EA5E9);
+}
+
+/* ── Trust badge pill ── */
+.trust-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 14px;
+  border-radius: 100px;
+  background: rgba(79,70,229,0.07);
+  border: 1px solid rgba(79,70,229,0.18);
+  color: #4F46E5;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+/* ── Brand button ── */
+.btn-brand {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 10px 24px;
+  border-radius: 12px;
+  background: linear-gradient(135deg, #4F46E5 0%, #7C3AED 100%);
+  color: #fff;
+  font-weight: 700;
+  font-size: 14px;
+  text-decoration: none;
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s;
+  box-shadow: 0 1px 3px rgba(79,70,229,0.3), 0 4px 12px rgba(79,70,229,0.2);
+}
+.btn-brand:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 2px 8px rgba(79,70,229,0.4), 0 8px 24px rgba(79,70,229,0.25);
+}
+.btn-brand:active { transform: translateY(0); }
+
+/* ── Floating label animation ── */
+@keyframes float-y {
+  0%, 100% { transform: translateY(0px); }
+  50%       { transform: translateY(-8px); }
+}
+.float-anim { animation: float-y 4s ease-in-out infinite; }
+
+/* ── Step connector line ── */
+.step-connector {
+  position: absolute;
+  top: 50%;
+  left: calc(100% + 12px);
+  width: calc(100% - 24px);
+  height: 1px;
+  background: linear-gradient(90deg, #CBD5E1, transparent);
 }

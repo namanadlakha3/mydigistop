@@ -20,7 +20,7 @@ export function Card({ children, className, hover = false, glass = true, onClick
       className={cn(
         'rounded-2xl p-6',
         glass && 'glass-card',
-        !glass && 'rounded-2xl p-6',
+        !glass && 'bg-white border border-slate-200 rounded-2xl p-6',
         onClick && 'cursor-pointer',
         className
       )}
@@ -35,11 +35,11 @@ export function CardHeader({ children, className }: { children: ReactNode; class
 }
 
 export function CardTitle({ children, className }: { children: ReactNode; className?: string }) {
-  return <h3 className={cn('text-lg font-bold text-white', className)}>{children}</h3>;
+  return <h3 className={cn('text-lg font-bold text-slate-800', className)}>{children}</h3>;
 }
 
 export function CardDescription({ children, className }: { children: ReactNode; className?: string }) {
-  return <p className={cn('text-sm mt-1', className)} style={{ color: 'rgba(255,255,255,0.55)' }}>{children}</p>;
+  return <p className={cn('text-sm mt-1 text-slate-500', className)}>{children}</p>;
 }
 
 export function CardContent({ children, className }: { children: ReactNode; className?: string }) {
@@ -47,5 +47,5 @@ export function CardContent({ children, className }: { children: ReactNode; clas
 }
 
 export function CardFooter({ children, className }: { children: ReactNode; className?: string }) {
-  return <div className={cn('mt-4 pt-4 border-t border-white/10', className)}>{children}</div>;
+  return <div className={cn('mt-4 pt-4 border-t border-slate-200', className)}>{children}</div>;
 }

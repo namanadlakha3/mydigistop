@@ -19,7 +19,7 @@ export function CartDrawer() {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             onClick={closeCart}
-            className="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm"
+            className="fixed inset-0 z-50 bg-slate-900/50 backdrop-blur-sm"
           />
 
           {/* Drawer */}
@@ -28,31 +28,27 @@ export function CartDrawer() {
             animate={{ x: 0 }}
             exit={{ x: '100%' }}
             transition={{ type: 'spring', stiffness: 300, damping: 30 }}
-            className="fixed right-0 top-0 bottom-0 z-50 w-full max-w-md flex flex-col border-l"
-            style={{
-              background: 'linear-gradient(160deg, #12152A 0%, #0A0B14 100%)',
-              borderColor: 'rgba(255,255,255,0.08)',
-            }}
+            className="fixed right-0 top-0 bottom-0 z-50 w-full max-w-md flex flex-col border-l border-slate-200 bg-white shadow-2xl"
           >
             {/* Header */}
-            <div className="flex items-center justify-between p-6 border-b" style={{ borderColor: 'rgba(255,255,255,0.08)' }}>
+            <div className="flex items-center justify-between p-6 border-b border-slate-200 bg-slate-50">
               <div className="flex items-center gap-3">
                 <div
-                  className="w-9 h-9 rounded-xl flex items-center justify-center"
-                  style={{ background: 'linear-gradient(135deg, #6C47FF, #00C2CB)' }}
+                  className="w-9 h-9 rounded-xl flex items-center justify-center shadow-sm"
+                  style={{ background: 'linear-gradient(135deg, #4F46E5, #7C3AED)' }}
                 >
                   <ShoppingCart size={16} className="text-white" />
                 </div>
                 <div>
-                  <h2 className="text-lg font-bold text-white">Your Cart</h2>
-                  <p className="text-xs" style={{ color: 'rgba(255,255,255,0.45)' }}>
+                  <h2 className="text-lg font-bold text-slate-900">Your Cart</h2>
+                  <p className="text-xs text-slate-500">
                     {getTotalItems()} {getTotalItems() === 1 ? 'item' : 'items'}
                   </p>
                 </div>
               </div>
               <button
                 onClick={closeCart}
-                className="p-2 rounded-xl text-white/50 hover:text-white hover:bg-white/8 transition-all"
+                className="p-2 rounded-xl text-slate-400 hover:text-slate-700 hover:bg-slate-100 transition-all border-none bg-transparent cursor-pointer"
               >
                 <X size={20} />
               </button>
@@ -67,15 +63,12 @@ export function CartDrawer() {
                     animate={{ opacity: 1 }}
                     className="flex flex-col items-center justify-center h-full gap-4 text-center"
                   >
-                    <div
-                      className="w-20 h-20 rounded-2xl flex items-center justify-center"
-                      style={{ background: 'rgba(108,71,255,0.1)', border: '1px solid rgba(108,71,255,0.2)' }}
-                    >
-                      <Package size={32} style={{ color: 'rgba(108,71,255,0.6)' }} />
+                    <div className="w-20 h-20 rounded-2xl flex items-center justify-center bg-indigo-50 border border-indigo-200">
+                      <Package size={32} className="text-indigo-400" />
                     </div>
                     <div>
-                      <p className="font-semibold text-white mb-1">Your cart is empty</p>
-                      <p className="text-sm" style={{ color: 'rgba(255,255,255,0.45)' }}>
+                      <p className="font-semibold text-slate-800 mb-1">Your cart is empty</p>
+                      <p className="text-sm text-slate-500">
                         Browse our products and add them here
                       </p>
                     </div>
@@ -94,48 +87,41 @@ export function CartDrawer() {
                         initial={{ opacity: 0, x: 20 }}
                         animate={{ opacity: 1, x: 0 }}
                         exit={{ opacity: 0, x: -20 }}
-                        className="flex gap-4 p-4 rounded-2xl border"
-                        style={{
-                          background: 'rgba(255,255,255,0.03)',
-                          borderColor: 'rgba(255,255,255,0.07)',
-                        }}
+                        className="flex gap-4 p-4 rounded-2xl border border-slate-200 bg-white hover:shadow-sm transition-shadow"
                       >
-                        <div
-                          className="w-16 h-16 rounded-xl overflow-hidden shrink-0"
-                          style={{ background: 'rgba(255,255,255,0.05)' }}
-                        >
+                        <div className="w-16 h-16 rounded-xl overflow-hidden shrink-0 bg-slate-100 border border-slate-200">
                           {image ? (
                             <img src={image} alt={item.product.title} className="w-full h-full object-cover" />
                           ) : (
                             <div className="w-full h-full flex items-center justify-center">
-                              <Package size={20} style={{ color: 'rgba(108,71,255,0.4)' }} />
+                              <Package size={20} className="text-indigo-300" />
                             </div>
                           )}
                         </div>
 
                         <div className="flex-1 min-w-0">
-                          <p className="text-sm font-semibold text-white leading-snug truncate mb-1">
+                          <p className="text-sm font-semibold text-slate-800 leading-snug truncate mb-1">
                             {item.product.title}
                           </p>
-                          <p className="text-base font-bold" style={{ color: '#6C47FF' }}>
+                          <p className="text-base font-bold text-indigo-600">
                             {formatPrice(price * item.quantity)}
                           </p>
 
                           <div className="flex items-center justify-between mt-2">
-                            <div className="flex items-center gap-1.5">
+                            <div className="flex items-center gap-1 border border-slate-200 rounded-lg overflow-hidden">
                               <button
                                 onClick={() => updateQuantity(item.product.id, item.quantity - 1)}
-                                className="w-6 h-6 rounded-lg flex items-center justify-center text-white/50 hover:text-white hover:bg-white/8 transition-all"
+                                className="w-7 h-7 flex items-center justify-center text-slate-500 hover:text-slate-900 hover:bg-slate-100 transition-all border-none bg-transparent cursor-pointer"
                               >
                                 <Minus size={12} />
                               </button>
-                              <span className="w-6 text-center text-sm font-semibold text-white">
+                              <span className="w-7 text-center text-sm font-semibold text-slate-800">
                                 {item.quantity}
                               </span>
                               <button
                                 onClick={() => updateQuantity(item.product.id, item.quantity + 1)}
                                 disabled={item.quantity >= item.product.inventory}
-                                className="w-6 h-6 rounded-lg flex items-center justify-center text-white/50 hover:text-white hover:bg-white/8 transition-all disabled:opacity-30"
+                                className="w-7 h-7 flex items-center justify-center text-slate-500 hover:text-slate-900 hover:bg-slate-100 transition-all disabled:opacity-30 border-none bg-transparent cursor-pointer"
                               >
                                 <Plus size={12} />
                               </button>
@@ -143,7 +129,7 @@ export function CartDrawer() {
 
                             <button
                               onClick={() => removeItem(item.product.id)}
-                              className="p-1.5 rounded-lg text-red-400/60 hover:text-red-400 hover:bg-red-500/10 transition-all"
+                              className="p-1.5 rounded-lg text-red-400 hover:text-red-600 hover:bg-red-50 transition-all border-none bg-transparent cursor-pointer"
                             >
                               <Trash2 size={14} />
                             </button>
@@ -158,17 +144,17 @@ export function CartDrawer() {
 
             {/* Footer */}
             {items.length > 0 && (
-              <div className="p-6 border-t" style={{ borderColor: 'rgba(255,255,255,0.08)' }}>
+              <div className="p-6 border-t border-slate-200 bg-slate-50">
                 <div className="flex items-center justify-between mb-4">
-                  <span className="text-sm" style={{ color: 'rgba(255,255,255,0.6)' }}>Total</span>
-                  <span className="text-xl font-bold text-white">{formatPrice(getTotalPrice())}</span>
+                  <span className="text-sm text-slate-600">Total</span>
+                  <span className="text-xl font-bold text-slate-900">{formatPrice(getTotalPrice())}</span>
                 </div>
                 <Link to="/checkout" onClick={closeCart}>
                   <Button size="lg" className="w-full gap-2">
                     Proceed to Checkout <ArrowRight size={18} />
                   </Button>
                 </Link>
-                <p className="text-center text-xs mt-3" style={{ color: 'rgba(255,255,255,0.35)' }}>
+                <p className="text-center text-xs mt-3 text-slate-400">
                   License keys delivered after manual verification
                 </p>
               </div>
