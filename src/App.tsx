@@ -42,13 +42,13 @@ const AdminCategories = lazy(() => import('@/features/admin/AdminCategories').th
 
 function PageLoader() {
   return (
-    <div className="min-h-screen flex items-center justify-center">
+    <div className="min-h-screen flex items-center justify-center bg-slate-50">
       <div className="flex flex-col items-center gap-4">
         <div
           className="w-12 h-12 rounded-full border-2 border-t-transparent animate-spin"
-          style={{ borderColor: '#6C47FF', borderTopColor: 'transparent' }}
+          style={{ borderColor: '#4F46E5', borderTopColor: 'transparent' }}
         />
-        <p className="text-sm" style={{ color: 'rgba(255,255,255,0.5)' }}>Loading...</p>
+        <p className="text-sm text-slate-500">Loading...</p>
       </div>
     </div>
   );
@@ -158,11 +158,11 @@ export default function App() {
                 {/* 404 */}
                 <Route path="*" element={
                   <PublicLayout>
-                    <div className="min-h-screen flex items-center justify-center text-center">
+                    <div className="min-h-screen flex items-center justify-center text-center bg-slate-50">
                       <div>
                         <div className="text-8xl mb-6">🔍</div>
-                        <h1 className="text-4xl font-black text-white mb-3">Page Not Found</h1>
-                        <p className="mb-8" style={{ color: 'rgba(255,255,255,0.5)' }}>
+                        <h1 className="text-4xl font-black text-slate-900 mb-3">Page Not Found</h1>
+                        <p className="mb-8 text-slate-500">
                           The page you're looking for doesn't exist.
                         </p>
                         <a href="/" className="btn-brand text-base px-8 py-3">Go Home</a>
@@ -177,9 +177,10 @@ export default function App() {
               position="top-right"
               toastOptions={{
                 style: {
-                  background: '#12152A',
-                  border: '1px solid rgba(255,255,255,0.1)',
-                  color: '#fff',
+                  background: '#fff',
+                  border: '1px solid #E2E8F0',
+                  color: '#0F172A',
+                  boxShadow: '0 4px 24px rgba(15,23,42,0.10)',
                 },
               }}
             />

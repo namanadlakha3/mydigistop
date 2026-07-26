@@ -3,7 +3,7 @@ import { useParams, Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import {
   ShoppingCart, Heart, Star, Shield, Zap, CheckCircle2,
-  ChevronLeft, Package, Info, Key, ArrowRight
+  ChevronLeft, Package, Key, ArrowRight
 } from 'lucide-react';
 import { Helmet } from 'react-helmet-async';
 import { useProduct, useProducts } from '@/hooks/useProducts';
@@ -56,8 +56,8 @@ export function ProductDetailPage() {
       <div className="min-h-screen pt-24 flex items-center justify-center">
         <div className="text-center">
           <div className="text-6xl mb-4">😕</div>
-          <h2 className="text-2xl font-bold text-white mb-2">Product not found</h2>
-          <Link to="/products" className="text-purple-400 hover:text-purple-300">Browse all products</Link>
+          <h2 className="text-2xl font-bold text-slate-800 mb-2">Product not found</h2>
+          <Link to="/products" className="text-indigo-600 hover:text-indigo-700">Browse all products</Link>
         </div>
       </div>
     );
@@ -92,23 +92,23 @@ export function ProductDetailPage() {
         <meta name="description" content={product.description?.slice(0, 160) || `Buy ${product.title} license key at MyDigiStop`} />
       </Helmet>
 
-      <div className="min-h-screen pt-24">
+      <div className="min-h-screen pt-24 bg-slate-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
           {/* Breadcrumb */}
-          <div className="flex items-center gap-2 text-sm mb-8" style={{ color: 'rgba(255,255,255,0.4)' }}>
-            <Link to="/products" className="flex items-center gap-1.5 hover:text-white transition-colors">
+          <div className="flex items-center gap-2 text-sm mb-8 text-slate-400">
+            <Link to="/products" className="flex items-center gap-1.5 hover:text-indigo-600 transition-colors">
               <ChevronLeft size={15} /> Products
             </Link>
             {product.category && (
               <>
                 <span>/</span>
-                <Link to={`/products?category=${product.category.slug}`} className="hover:text-white transition-colors">
+                <Link to={`/products?category=${product.category.slug}`} className="hover:text-indigo-600 transition-colors">
                   {product.category.name}
                 </Link>
               </>
             )}
             <span>/</span>
-            <span className="text-white/70 truncate max-w-48">{product.title}</span>
+            <span className="text-slate-600 truncate max-w-48">{product.title}</span>
           </div>
 
           {/* Main Content */}
@@ -116,8 +116,8 @@ export function ProductDetailPage() {
             {/* Images */}
             <motion.div initial={{ opacity: 0, x: -20 }} animate={{ opacity: 1, x: 0 }}>
               <div
-                className="relative rounded-2xl overflow-hidden mb-4 border"
-                style={{ height: '380px', background: 'rgba(255,255,255,0.03)', borderColor: 'rgba(255,255,255,0.08)' }}
+                className="relative rounded-2xl overflow-hidden mb-4 border border-slate-200 bg-white"
+                style={{ height: '380px' }}
               >
                 {images[activeImage] ? (
                   <img
@@ -126,8 +126,8 @@ export function ProductDetailPage() {
                     className="w-full h-full object-contain p-6"
                   />
                 ) : (
-                  <div className="w-full h-full flex items-center justify-center">
-                    <Package size={80} style={{ color: 'rgba(108,71,255,0.3)' }} />
+                  <div className="w-full h-full flex items-center justify-center bg-slate-50">
+                    <Package size={80} className="text-indigo-200" />
                   </div>
                 )}
                 {hasDiscount && (
@@ -143,8 +143,8 @@ export function ProductDetailPage() {
                     <button
                       key={img.id}
                       onClick={() => setActiveImage(i)}
-                      className={`shrink-0 w-20 h-20 rounded-xl overflow-hidden border-2 transition-all ${
-                        activeImage === i ? 'border-purple-500' : 'border-white/10 hover:border-white/30'
+                      className={`shrink-0 w-20 h-20 rounded-xl overflow-hidden border-2 transition-all bg-white ${
+                        activeImage === i ? 'border-indigo-500 shadow-md' : 'border-slate-200 hover:border-slate-300'
                       }`}
                     >
                       <img src={img.image_url} alt="" className="w-full h-full object-cover" />
@@ -164,7 +164,7 @@ export function ProductDetailPage() {
                 <Badge variant="purple">{product.category.name}</Badge>
               )}
 
-              <h1 className="text-3xl font-black text-white leading-tight">{product.title}</h1>
+              <h1 className="text-3xl font-black text-slate-900 leading-tight">{product.title}</h1>
 
               {/* Rating */}
               <div className="flex items-center gap-3">
@@ -173,14 +173,14 @@ export function ProductDetailPage() {
                     <Star key={i} size={16} className="fill-amber-400 text-amber-400" />
                   ))}
                 </div>
-                <span className="text-sm" style={{ color: 'rgba(255,255,255,0.5)' }}>4.8 (120 reviews)</span>
+                <span className="text-sm text-slate-500">4.8 (120 reviews)</span>
               </div>
 
               {/* Price */}
               <div className="flex items-baseline gap-3">
-                <span className="text-4xl font-black text-white">{formatPrice(displayPrice)}</span>
+                <span className="text-4xl font-black text-slate-900">{formatPrice(displayPrice)}</span>
                 {hasDiscount && (
-                  <span className="text-xl line-through" style={{ color: 'rgba(255,255,255,0.35)' }}>
+                  <span className="text-xl line-through text-slate-400">
                     {formatPrice(product.price)}
                   </span>
                 )}
@@ -188,10 +188,10 @@ export function ProductDetailPage() {
 
               {/* Trust badges */}
               <div className="flex flex-wrap gap-3">
-                <div className="flex items-center gap-2 text-xs px-3 py-2 rounded-xl border border-green-500/20 bg-green-500/5 text-green-400">
+                <div className="flex items-center gap-2 text-xs px-3 py-2 rounded-xl border border-emerald-200 bg-emerald-50 text-emerald-700">
                   <Shield size={12} /> Genuine Key
                 </div>
-                <div className="flex items-center gap-2 text-xs px-3 py-2 rounded-xl border border-blue-500/20 bg-blue-500/5 text-blue-400">
+                <div className="flex items-center gap-2 text-xs px-3 py-2 rounded-xl border border-sky-200 bg-sky-50 text-sky-700">
                   <Zap size={12} /> Fast Delivery
                 </div>
                 <InventoryBadge count={product.inventory} />
@@ -199,17 +199,17 @@ export function ProductDetailPage() {
 
               {/* Quantity & Actions */}
               <div className="flex items-center gap-3">
-                <div className="flex items-center gap-0 rounded-xl border border-white/10 overflow-hidden">
+                <div className="flex items-center gap-0 rounded-xl border border-slate-300 overflow-hidden bg-white">
                   <button
                     onClick={() => setQuantity(Math.max(1, quantity - 1))}
-                    className="px-4 py-3 text-white/60 hover:text-white hover:bg-white/5 transition-all font-bold"
+                    className="px-4 py-3 text-slate-500 hover:text-slate-900 hover:bg-slate-100 transition-all font-bold"
                   >
                     −
                   </button>
-                  <span className="px-4 py-3 text-white font-semibold min-w-12 text-center">{quantity}</span>
+                  <span className="px-4 py-3 text-slate-800 font-semibold min-w-12 text-center border-x border-slate-300">{quantity}</span>
                   <button
                     onClick={() => setQuantity(Math.min(product.inventory, quantity + 1))}
-                    className="px-4 py-3 text-white/60 hover:text-white hover:bg-white/5 transition-all font-bold"
+                    className="px-4 py-3 text-slate-500 hover:text-slate-900 hover:bg-slate-100 transition-all font-bold"
                   >
                     +
                   </button>
@@ -231,19 +231,19 @@ export function ProductDetailPage() {
                   onClick={handleWishlist}
                   className="h-12 w-12"
                 >
-                  <Heart size={18} className={wishlisted ? 'fill-red-400 text-red-400' : ''} />
+                  <Heart size={18} className={wishlisted ? 'fill-red-500 text-red-500' : ''} />
                 </Button>
               </div>
 
               {/* Info */}
-              <div className="space-y-3 pt-2 border-t" style={{ borderColor: 'rgba(255,255,255,0.08)' }}>
+              <div className="space-y-3 pt-2 border-t border-slate-200">
                 {[
                   { label: 'Brand', value: product.brand || 'N/A' },
-                  { label: 'SKU', value: product.sku || 'N/A' },
+                  { label: 'SKU',   value: product.sku   || 'N/A' },
                 ].map(({ label, value }) => (
                   <div key={label} className="flex items-center gap-2 text-sm">
-                    <span style={{ color: 'rgba(255,255,255,0.4)' }}>{label}:</span>
-                    <span className="text-white/70 font-medium">{value}</span>
+                    <span className="text-slate-400">{label}:</span>
+                    <span className="text-slate-700 font-medium">{value}</span>
                   </div>
                 ))}
               </div>
@@ -252,50 +252,47 @@ export function ProductDetailPage() {
 
           {/* Tabs */}
           <div className="mb-8">
-            <div className="flex gap-1 p-1 rounded-2xl w-fit mb-8" style={{ background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(255,255,255,0.07)' }}>
+            <div className="flex gap-1 p-1 rounded-2xl w-fit mb-8 bg-slate-100 border border-slate-200">
               {tabs.map((tab) => (
                 <button
                   key={tab}
                   onClick={() => setActiveTab(tab)}
                   className={`px-5 py-2.5 rounded-xl text-sm font-semibold transition-all ${
-                    activeTab === tab ? 'text-white' : 'text-white/50 hover:text-white'
+                    activeTab === tab ? 'text-white shadow-sm' : 'text-slate-500 hover:text-slate-700'
                   }`}
-                  style={activeTab === tab ? { background: 'linear-gradient(135deg, #6C47FF, #00C2CB)' } : undefined}
+                  style={activeTab === tab ? { background: 'linear-gradient(135deg, #4F46E5, #7C3AED)' } : undefined}
                 >
                   {tab}
                 </button>
               ))}
             </div>
 
-            <div className="p-6 rounded-2xl border" style={{ background: 'rgba(255,255,255,0.03)', borderColor: 'rgba(255,255,255,0.08)' }}>
+            <div className="p-6 rounded-2xl border border-slate-200 bg-white">
               {activeTab === 'Overview' && (
-                <div className="prose prose-invert max-w-none text-sm leading-relaxed" style={{ color: 'rgba(255,255,255,0.7)' }}>
+                <div className="prose max-w-none text-sm leading-relaxed text-slate-700">
                   {product.description || 'No description available.'}
                 </div>
               )}
               {activeTab === 'Features' && (
                 <ul className="space-y-3">
                   {(product.description || '').split('\n').filter(Boolean).map((line, i) => (
-                    <li key={i} className="flex items-start gap-3 text-sm" style={{ color: 'rgba(255,255,255,0.7)' }}>
-                      <CheckCircle2 size={16} className="text-green-400 shrink-0 mt-0.5" />
+                    <li key={i} className="flex items-start gap-3 text-sm text-slate-700">
+                      <CheckCircle2 size={16} className="text-emerald-500 shrink-0 mt-0.5" />
                       {line}
                     </li>
                   ))}
                   {!product.description && (
-                    <p style={{ color: 'rgba(255,255,255,0.4)' }}>No features listed.</p>
+                    <p className="text-slate-400">No features listed.</p>
                   )}
                 </ul>
               )}
               {activeTab === 'Activation' && (
                 <div className="space-y-4">
                   <div className="flex items-center gap-2 mb-4">
-                    <Key size={18} style={{ color: '#6C47FF' }} />
-                    <h3 className="font-semibold text-white">Activation Instructions</h3>
+                    <Key size={18} className="text-indigo-600" />
+                    <h3 className="font-semibold text-slate-800">Activation Instructions</h3>
                   </div>
-                  <div
-                    className="text-sm leading-relaxed whitespace-pre-wrap"
-                    style={{ color: 'rgba(255,255,255,0.7)' }}
-                  >
+                  <div className="text-sm leading-relaxed whitespace-pre-wrap text-slate-700">
                     {product.activation_instructions || 'Activation instructions will be provided with your license key.'}
                   </div>
                 </div>
@@ -307,8 +304,8 @@ export function ProductDetailPage() {
           {related && related.products.length > 0 && (
             <div className="mt-12">
               <div className="flex items-center justify-between mb-8">
-                <h2 className="text-2xl font-bold text-white">Related Products</h2>
-                <Link to="/products" className="flex items-center gap-1 text-sm text-purple-400 hover:text-purple-300">
+                <h2 className="text-2xl font-bold text-slate-900">Related Products</h2>
+                <Link to="/products" className="flex items-center gap-1 text-sm text-indigo-600 hover:text-indigo-700 no-underline">
                   View All <ArrowRight size={14} />
                 </Link>
               </div>

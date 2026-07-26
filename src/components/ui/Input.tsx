@@ -12,13 +12,13 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
     return (
       <div className="space-y-1.5">
         {label && (
-          <label htmlFor={id} className="block text-sm font-medium" style={{ color: 'rgba(255,255,255,0.7)' }}>
+          <label htmlFor={id} className="block text-sm font-medium text-slate-700">
             {label}
           </label>
         )}
         <div className="relative">
           {icon && (
-            <div className="absolute left-3 top-1/2 -translate-y-1/2" style={{ color: 'rgba(255,255,255,0.4)' }}>
+            <div className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400">
               {icon}
             </div>
           )}
@@ -26,17 +26,17 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
             ref={ref}
             id={id}
             className={cn(
-              'w-full rounded-xl px-4 py-2.5 text-sm text-white placeholder-white/30 transition-all duration-200',
-              'border border-white/10 bg-white/5',
-              'focus:outline-none focus:border-purple-500/50 focus:bg-white/8 focus:ring-1 focus:ring-purple-500/30',
+              'w-full rounded-xl px-4 py-2.5 text-sm text-slate-800 placeholder-slate-400 transition-all duration-200 bg-white',
+              'border border-slate-300',
+              'focus:outline-none focus:border-indigo-400 focus:ring-2 focus:ring-indigo-100',
               icon && 'pl-10',
-              error && 'border-red-500/50 focus:border-red-500/70',
+              error && 'border-red-400 focus:border-red-400 focus:ring-red-100',
               className
             )}
             {...props}
           />
         </div>
-        {error && <p className="text-xs text-red-400">{error}</p>}
+        {error && <p className="text-xs text-red-500">{error}</p>}
       </div>
     );
   }
@@ -53,7 +53,7 @@ export const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
     return (
       <div className="space-y-1.5">
         {label && (
-          <label htmlFor={id} className="block text-sm font-medium" style={{ color: 'rgba(255,255,255,0.7)' }}>
+          <label htmlFor={id} className="block text-sm font-medium text-slate-700">
             {label}
           </label>
         )}
@@ -62,15 +62,15 @@ export const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
           id={id}
           rows={4}
           className={cn(
-            'w-full rounded-xl px-4 py-2.5 text-sm text-white placeholder-white/30 transition-all duration-200 resize-none',
-            'border border-white/10 bg-white/5',
-            'focus:outline-none focus:border-purple-500/50 focus:bg-white/8 focus:ring-1 focus:ring-purple-500/30',
-            error && 'border-red-500/50',
+            'w-full rounded-xl px-4 py-2.5 text-sm text-slate-800 placeholder-slate-400 transition-all duration-200 resize-none bg-white',
+            'border border-slate-300',
+            'focus:outline-none focus:border-indigo-400 focus:ring-2 focus:ring-indigo-100',
+            error && 'border-red-400 focus:border-red-400',
             className
           )}
           {...props}
         />
-        {error && <p className="text-xs text-red-400">{error}</p>}
+        {error && <p className="text-xs text-red-500">{error}</p>}
       </div>
     );
   }
@@ -88,7 +88,7 @@ export const Select = forwardRef<HTMLSelectElement, SelectProps>(
     return (
       <div className="space-y-1.5">
         {label && (
-          <label htmlFor={id} className="block text-sm font-medium" style={{ color: 'rgba(255,255,255,0.7)' }}>
+          <label htmlFor={id} className="block text-sm font-medium text-slate-700">
             {label}
           </label>
         )}
@@ -96,22 +96,21 @@ export const Select = forwardRef<HTMLSelectElement, SelectProps>(
           ref={ref}
           id={id}
           className={cn(
-            'w-full rounded-xl px-4 py-2.5 text-sm text-white transition-all duration-200',
-            'border border-white/10 bg-dark-surface',
-            'focus:outline-none focus:border-purple-500/50 focus:ring-1 focus:ring-purple-500/30',
-            error && 'border-red-500/50',
+            'w-full rounded-xl px-4 py-2.5 text-sm text-slate-800 transition-all duration-200 bg-white',
+            'border border-slate-300',
+            'focus:outline-none focus:border-indigo-400 focus:ring-2 focus:ring-indigo-100',
+            error && 'border-red-400',
             className
           )}
-          style={{ backgroundColor: '#12152A' }}
           {...props}
         >
           {options.map((opt) => (
-            <option key={opt.value} value={opt.value} style={{ backgroundColor: '#12152A' }}>
+            <option key={opt.value} value={opt.value}>
               {opt.label}
             </option>
           ))}
         </select>
-        {error && <p className="text-xs text-red-400">{error}</p>}
+        {error && <p className="text-xs text-red-500">{error}</p>}
       </div>
     );
   }

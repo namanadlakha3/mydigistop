@@ -1,7 +1,7 @@
 import { useState, useCallback } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { Search, Filter, X, ChevronLeft, ChevronRight, SlidersHorizontal } from 'lucide-react';
+import { Search, X, ChevronLeft, ChevronRight, SlidersHorizontal } from 'lucide-react';
 import { Helmet } from 'react-helmet-async';
 import { useProducts, useCategories } from '@/hooks/useProducts';
 import { ProductCard } from '@/features/products/ProductCard';
@@ -11,10 +11,10 @@ import type { ProductFilters } from '@/types';
 import { useEffect } from 'react';
 
 const sortOptions = [
-  { value: 'newest', label: 'Newest First' },
-  { value: 'featured', label: 'Featured' },
-  { value: 'price_asc', label: 'Price: Low to High' },
-  { value: 'price_desc', label: 'Price: High to Low' },
+  { value: 'newest',    label: 'Newest First'       },
+  { value: 'featured',  label: 'Featured'            },
+  { value: 'price_asc', label: 'Price: Low to High'  },
+  { value: 'price_desc',label: 'Price: High to Low'  },
 ];
 
 export function ProductsPage() {
@@ -63,14 +63,14 @@ export function ProductsPage() {
         <meta name="description" content="Browse our catalog of genuine digital license keys for Windows, Office, Antivirus, and more." />
       </Helmet>
 
-      <div className="min-h-screen bg-[#07080F]">
+      <div className="min-h-screen bg-slate-50">
         {/* Header */}
-        <div className="pt-28 pb-12 border-b border-white/[0.07]" style={{ background: 'rgba(108,71,255,0.04)' }}>
+        <div className="pt-28 pb-12 border-b border-slate-200 bg-white">
           <div className="max-w-[1200px] mx-auto px-6">
             <motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }}>
-              <p className="text-[11px] font-bold uppercase tracking-widest g-text mb-2">Catalog</p>
-              <h1 className="text-3xl font-extrabold text-white tracking-tight mb-1.5">All Products</h1>
-              <p className="text-sm text-white/40">{data?.total ?? 0} products available</p>
+              <p className="text-[11px] font-bold uppercase tracking-widest text-indigo-500 mb-2">Catalog</p>
+              <h1 className="text-3xl font-extrabold text-slate-900 tracking-tight mb-1.5">All Products</h1>
+              <p className="text-sm text-slate-500">{data?.total ?? 0} products available — all genuine, all guaranteed</p>
             </motion.div>
           </div>
         </div>
@@ -91,11 +91,10 @@ export function ProductsPage() {
             <select
               value={sortBy}
               onChange={(e) => updateParam('sort', e.target.value)}
-              className="h-11 px-4 rounded-xl text-sm text-white border border-white/10 bg-white/5 focus:outline-none focus:border-purple-500/50 cursor-pointer"
-              style={{ backgroundColor: '#12152A' }}
+              className="h-11 px-4 rounded-xl text-sm text-slate-700 border border-slate-300 bg-white focus:outline-none focus:border-indigo-400 focus:ring-2 focus:ring-indigo-100 cursor-pointer"
             >
               {sortOptions.map((opt) => (
-                <option key={opt.value} value={opt.value} style={{ backgroundColor: '#12152A' }}>{opt.label}</option>
+                <option key={opt.value} value={opt.value}>{opt.label}</option>
               ))}
             </select>
 
@@ -103,13 +102,13 @@ export function ProductsPage() {
               onClick={() => setFilterOpen(!filterOpen)}
               className={`flex items-center gap-2 h-11 px-4 rounded-xl text-sm font-medium border transition-all ${
                 filterOpen || category
-                  ? 'bg-purple-500/15 border-purple-500/30 text-purple-300'
-                  : 'border-white/10 text-white/60 hover:text-white hover:bg-white/5'
+                  ? 'bg-indigo-50 border-indigo-300 text-indigo-700'
+                  : 'border-slate-300 text-slate-600 hover:text-slate-900 hover:bg-slate-100 bg-white'
               }`}
             >
               <SlidersHorizontal size={16} />
               Filters
-              {category && <span className="w-2 h-2 rounded-full bg-purple-400" />}
+              {category && <span className="w-2 h-2 rounded-full bg-indigo-500" />}
             </button>
           </div>
 
@@ -121,8 +120,8 @@ export function ProductsPage() {
               exit={{ opacity: 0, height: 0 }}
               className="mb-8"
             >
-              <div className="p-5 rounded-2xl border" style={{ background: 'rgba(255,255,255,0.03)', borderColor: 'rgba(255,255,255,0.08)' }}>
-                <p className="text-xs font-semibold uppercase tracking-wider mb-4" style={{ color: 'rgba(255,255,255,0.4)' }}>
+              <div className="p-5 rounded-2xl border border-slate-200 bg-white shadow-sm">
+                <p className="text-xs font-semibold uppercase tracking-wider mb-4 text-slate-400">
                   Filter by Category
                 </p>
                 <div className="flex flex-wrap gap-2">
@@ -130,8 +129,8 @@ export function ProductsPage() {
                     onClick={() => updateParam('category', '')}
                     className={`px-4 py-2 rounded-xl text-sm font-medium border transition-all ${
                       !category
-                        ? 'bg-purple-500/20 border-purple-500/40 text-purple-300'
-                        : 'border-white/10 text-white/50 hover:text-white hover:border-white/20'
+                        ? 'bg-indigo-50 border-indigo-300 text-indigo-700'
+                        : 'border-slate-200 text-slate-500 hover:text-slate-800 hover:border-slate-300 bg-white'
                     }`}
                   >
                     All
@@ -142,8 +141,8 @@ export function ProductsPage() {
                       onClick={() => updateParam('category', cat.slug)}
                       className={`px-4 py-2 rounded-xl text-sm font-medium border transition-all ${
                         category === cat.slug
-                          ? 'bg-purple-500/20 border-purple-500/40 text-purple-300'
-                          : 'border-white/10 text-white/50 hover:text-white hover:border-white/20'
+                          ? 'bg-indigo-50 border-indigo-300 text-indigo-700'
+                          : 'border-slate-200 text-slate-500 hover:text-slate-800 hover:border-slate-300 bg-white'
                       }`}
                     >
                       {cat.icon} {cat.name}
@@ -158,17 +157,17 @@ export function ProductsPage() {
           {(search || category) && (
             <div className="flex flex-wrap gap-2 mb-6">
               {search && (
-                <span className="flex items-center gap-2 px-3 py-1.5 rounded-xl text-xs bg-purple-500/10 border border-purple-500/20 text-purple-300">
+                <span className="flex items-center gap-2 px-3 py-1.5 rounded-xl text-xs bg-indigo-50 border border-indigo-200 text-indigo-700">
                   Search: "{search}"
-                  <button onClick={() => { setSearchInput(''); updateParam('search', ''); }}>
+                  <button onClick={() => { setSearchInput(''); updateParam('search', ''); }} className="hover:text-indigo-900">
                     <X size={12} />
                   </button>
                 </span>
               )}
               {category && (
-                <span className="flex items-center gap-2 px-3 py-1.5 rounded-xl text-xs bg-cyan-500/10 border border-cyan-500/20 text-cyan-300">
+                <span className="flex items-center gap-2 px-3 py-1.5 rounded-xl text-xs bg-sky-50 border border-sky-200 text-sky-700">
                   Category: {category}
-                  <button onClick={() => updateParam('category', '')}>
+                  <button onClick={() => updateParam('category', '')} className="hover:text-sky-900">
                     <X size={12} />
                   </button>
                 </span>
@@ -182,8 +181,8 @@ export function ProductsPage() {
           ) : data?.products.length === 0 ? (
             <div className="text-center py-24">
               <div className="text-6xl mb-4">🔍</div>
-              <h3 className="text-xl font-bold text-white mb-2">No products found</h3>
-              <p style={{ color: 'rgba(255,255,255,0.5)' }}>Try adjusting your search or filters</p>
+              <h3 className="text-xl font-bold text-slate-800 mb-2">No products found</h3>
+              <p className="text-slate-500">Try adjusting your search or filters</p>
             </div>
           ) : (
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
@@ -199,7 +198,7 @@ export function ProductsPage() {
               <button
                 onClick={() => updateParam('page', String(currentPage - 1))}
                 disabled={currentPage <= 1}
-                className="p-2.5 rounded-xl border border-white/10 text-white/60 hover:text-white hover:bg-white/5 disabled:opacity-30 transition-all"
+                className="p-2.5 rounded-xl border border-slate-300 text-slate-600 hover:text-slate-900 hover:bg-slate-100 disabled:opacity-30 transition-all bg-white"
               >
                 <ChevronLeft size={18} />
               </button>
@@ -212,10 +211,10 @@ export function ProductsPage() {
                     onClick={() => updateParam('page', String(page))}
                     className={`w-10 h-10 rounded-xl text-sm font-semibold transition-all ${
                       currentPage === page
-                        ? 'text-white'
-                        : 'border border-white/10 text-white/50 hover:text-white hover:bg-white/5'
+                        ? 'text-white shadow-sm'
+                        : 'border border-slate-300 text-slate-600 hover:text-slate-900 hover:bg-slate-100 bg-white'
                     }`}
-                    style={currentPage === page ? { background: 'linear-gradient(135deg, #6C47FF, #00C2CB)' } : undefined}
+                    style={currentPage === page ? { background: 'linear-gradient(135deg, #4F46E5, #7C3AED)' } : undefined}
                   >
                     {page}
                   </button>
@@ -225,7 +224,7 @@ export function ProductsPage() {
               <button
                 onClick={() => updateParam('page', String(currentPage + 1))}
                 disabled={currentPage >= totalPages}
-                className="p-2.5 rounded-xl border border-white/10 text-white/60 hover:text-white hover:bg-white/5 disabled:opacity-30 transition-all"
+                className="p-2.5 rounded-xl border border-slate-300 text-slate-600 hover:text-slate-900 hover:bg-slate-100 disabled:opacity-30 transition-all bg-white"
               >
                 <ChevronRight size={18} />
               </button>

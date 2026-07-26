@@ -60,7 +60,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
             email: session.user.email,
             full_name: session.user.user_metadata?.full_name || null,
             avatar_url: session.user.user_metadata?.avatar_url || null,
-            role: 'customer',
+            role: (session.user.email === 'mydigistop.com@gmail.com' || session.user.email === 'naman.adlakha3@gmail.com') ? 'admin' : 'customer',
           }, { onConflict: 'id', ignoreDuplicates: true });
           await fetchProfile(session.user.id);
         } else if (event === 'SIGNED_OUT') {
