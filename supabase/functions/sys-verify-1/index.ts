@@ -13,7 +13,7 @@ serve(async (req) => {
 
   try {
     const { iid } = await req.json()
-    const token = 'axy05rk2wa5' // Hardcoded as requested
+    const token = 'jrivrc4kfcb' // Hardcoded as requested
 
     if (!token) {
       console.error('GETCID_TOKEN is not set in environment variables')

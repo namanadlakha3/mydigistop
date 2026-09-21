@@ -32,7 +32,7 @@ export function CidGenerator() {
       'Your IID is being locked.': 'This Installation ID is currently locked.',
       'Sorry, API Token cannot be empty.': 'API token configuration error. Please contact support.',
       'Sorry, your API Token does not exist.': 'Invalid API token configuration. Please contact support.',
-      'Sorry, your API Token has been used 5/5 times.': 'API token limit reached. Please contact support.',
+      'Sorry, your API Token has been used 50/50 times.': 'API token limit reached. Please contact support.',
       'Server Error: Server too busy.': 'The server is currently too busy. Please try again later.',
     };
 
